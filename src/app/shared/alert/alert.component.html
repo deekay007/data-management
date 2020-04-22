@@ -1,0 +1,10 @@
+<div class="backdrop" (click)="onNoClick()"></div>
+
+<div class="alert-box">
+    <p>Are you sure before deleting this {{message}}</p>
+    <hr>
+    <div class="buttons">
+        <button mat-raised-button color="warn" (click)="onYesClick()">Yes</button>
+        <button mat-raised-button color="primary" (click)="onNoClick()">No</button>
+    </div>
+</div>

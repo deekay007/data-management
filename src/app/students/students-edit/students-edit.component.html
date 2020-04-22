@@ -1,0 +1,140 @@
+<h1 mat-dialog-title>{{ dataPassed.editMode ? 'Edit' : 'Add' }} Student</h1>
+
+<div mat-dialog-content>
+    <mat-horizontal-stepper>
+        <!-- personal details stepper -->
+        <form [formGroup]="studentForm">
+            <mat-step>
+                <ng-template matStepLabel>Fill personnal details</ng-template>
+                <div fxLayout fxLayoutGap="20px">
+                    <div fxFlex=100>
+                        <div fxLayout>
+                            <mat-form-field fxFlex=100>
+                                <input type="text" placeholder="Name" matInput formControlName="name" pattern="^[a-zA-Z ]*$">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout fxLayoutGap="20px">
+                            <mat-form-field fxFlex=34>
+                                <mat-label>Category</mat-label>
+                                <mat-select formControlName="category">
+                                    <mat-option value="general">General</mat-option>
+                                    <mat-option value="obc">OBC</mat-option>
+                                    <mat-option value="sc">SC</mat-option>
+                                    <mat-option value="st">ST</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field fxFlex=33>
+                                <input type="text" placeholder="Blood Group" matInput formControlName="bloodGroup" pattern="^(A|B|AB|O|a|b|ab|o)[+-]">
+                            </mat-form-field>
+                            <mat-form-field fxFlex=33>
+                                <input matInput [matDatepicker]="picker" placeholder="Date of Birth"
+                                    formControlName="dob">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout>
+                            <mat-form-field fxFlex=100>
+                                <input type="text" placeholder="School Name" matInput formControlName="schoolName">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout fxLayoutGap="20px">
+                            <mat-form-field fxFlex=50>
+                                <input type="text" placeholder="Year of Joining" matInput
+                                    formControlName="yearOfJoining" pattern="^[2][0][0-2][0-9]$">
+                            </mat-form-field>
+                            <mat-form-field fxFlex=50>
+                                <input type="text" placeholder="Aadhaar No" matInput formControlName="aadharNumber" pattern="^[0-9]{12}">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout fxLayoutGap="20px">
+                            <mat-form-field fxFlex=34>
+                                <mat-label>Gender</mat-label>
+                                <mat-select formControlName="gender">
+                                    <mat-option value="male">Male</mat-option>
+                                    <mat-option value="female">Female</mat-option>
+                                    <mat-option value="others">Others</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field fxFlex=33>
+                                <mat-label>Sponsored</mat-label>
+                                <mat-select formControlName="sponsored">
+                                    <mat-option value="no">No</mat-option>
+                                    <mat-option value="yes">Yes</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field fxFlex=33>
+                                <input placeholder="Sponsored Year" type="text" matInput
+                                    formControlName="sponsoredYear" pattern="^[2][0][0-2][0-9]$">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                </div>
+            </mat-step>
+
+            <!-- Family details stepper -->
+            <mat-step>
+                <ng-template matStepLabel>Fill family details</ng-template>
+                <div FxLayout fxLayoutGap="20px">
+                    <div fxFlex=100>
+                        <div fxLayout fxLayoutGap="20px">
+                            <mat-form-field fxFlex=50>
+                                <input type="text" placeholder="Mother's Name" matInput formControlName="mothersName" pattern="^[a-zA-Z ]*$">
+                            </mat-form-field>
+                            <mat-form-field fxFlex=50>
+                                <input type="text" placeholder="Father's Name" matInput formControlName="fathersName" pattern="^[a-zA-Z ]*$">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout>
+                            <mat-form-field fxFlex=100>
+                                <input type="text" placeholder="Address" matInput formControlName="address">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout fxLayoutGap="20px">
+                            <mat-form-field fxFlex=34>
+                                <input type="text" placeholder="Locality" matInput formControlName="locality" pattern="^[a-zA-Z ]*$">
+                            </mat-form-field>
+                            <mat-form-field fxFlex=33>
+                                <input type="text" placeholder="PIN Code" matInput formControlName="pincode" pattern="^[0-9]{6}$">
+                            </mat-form-field>
+                            <mat-form-field fxFlex=33>
+                                <input type="text" placeholder="Mobile Number" matInput formControlName="mobileNumber" pattern="^[0-9]{10}$">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout fxLayoutGap="20px">
+                            <mat-form-field fxFlex=34>
+                                <input type="text" placeholder="Father's Aadhar No" matInput
+                                    formControlName="fathersAadharNumber" pattern="^[0-9]{12}">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+                    <button mat-raised-button color="primary" matStepperNext style="margin-left: 10px;">Next</button>
+                </div>
+            </mat-step>
+
+            <!-- Upload docs and submit -->
+            <mat-step>
+                <ng-template matStepLabel>Upload and save</ng-template>
+                <div *ngIf="dataPassed.editMode">
+                    <img [src]="dataPassed.student.imagePath">
+                </div>
+                <div *ngIf="!dataPassed.editMode">
+                    <img src="../../../assets/images/empty-profile.jpg">
+                </div>
+                <div>
+                    <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+                    <button mat-raised-button color="warn" mat-dialog-close style="margin-left: 10px;">cancel</button>
+                    <button mat-raised-button color="primary" [mat-dialog-close]="studentForm"
+                        style="margin-left: 10px;"
+                        [disabled]="studentForm.invalid">{{ dataPassed.editMode? 'Save' : 'Add' }}</button>
+                </div>
+            </mat-step>
+        </form>
+    </mat-horizontal-stepper>
+</div>
