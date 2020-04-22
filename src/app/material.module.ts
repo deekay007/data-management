@@ -13,6 +13,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
     imports: [
@@ -29,7 +31,9 @@ import { MatSelectModule } from '@angular/material/select';
         MatDialogModule,
         MatStepperModule,
         MatTableModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSortModule,
+        MatPaginatorModule
     ],
     exports: [
         MatButtonModule,
@@ -45,7 +49,9 @@ import { MatSelectModule } from '@angular/material/select';
         MatDialogModule,
         MatStepperModule,
         MatTableModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSortModule,
+        MatPaginatorModule
     ]
 })
 export class MaterialModule { }

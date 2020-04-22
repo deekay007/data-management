@@ -1,19 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentsEditComponent } from './students-edit/students-edit.component';
 import { StudentsService } from '../shared/students.service';
 import { Student } from './student.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.css']
 })
-export class StudentsComponent implements OnInit {
+export class StudentsComponent implements OnInit, AfterViewInit {
 
   showAlert: boolean = false;
   index: number;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   displayedColumns: string[] = ['serialNumber', 'name', 'fathersName', 'gender', 'dob', 'contact', 'locality','showDetails', 'deleteDetails'];
   dataSource = new MatTableDataSource<Student>();
 
@@ -24,6 +29,15 @@ export class StudentsComponent implements OnInit {
     this.studentsService.studentsListChanged.subscribe(students => {
       this.dataSource.data = students
     })
+  }
+
+  ngAfterViewInit(){
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  doFilter(filterValue){
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   onAddStudent() {
@@ -54,7 +68,7 @@ export class StudentsComponent implements OnInit {
           pincode: student.value.pincode,
           mobileNumber: student.value.mobileNumber,
           fathersAadharNumber: student.value.fathersAadharNumber,
-          imagePath: 'https://i.pinimg.com/originals/7d/1a/3f/7d1a3f77eee9f34782c6f88e97a6c888.jpg'
+          imagePath: student.value.imagePath
         });
       }
     })
@@ -89,7 +103,7 @@ export class StudentsComponent implements OnInit {
           pincode: student.value.pincode,
           mobileNumber: student.value.mobileNumber,
           fathersAadharNumber: student.value.fathersAadharNumber,
-          imagePath: 'https://i.pinimg.com/originals/7d/1a/3f/7d1a3f77eee9f34782c6f88e97a6c888.jpg'
+          imagePath: student.value.imagePath
         });
       }
     })

@@ -121,13 +121,20 @@
             <!-- Upload docs and submit -->
             <mat-step>
                 <ng-template matStepLabel>Upload and save</ng-template>
-                <div *ngIf="dataPassed.editMode">
+                <div *ngIf="dataPassed.editMode" fxLayout="column">
+                    <mat-form-field>
+                        <input type="text" matInput formControlName="imagePath">
+                    </mat-form-field>
                     <img [src]="dataPassed.student.imagePath">
                 </div>
-                <div *ngIf="!dataPassed.editMode">
-                    <img src="../../../assets/images/empty-profile.jpg">
+                <div *ngIf="!dataPassed.editMode" fxLayout="column">
+                    <mat-form-field>
+                        <input type="text" matInput formControlName="imagePath" placeholder="Image path" [(ngModel)]="imgPreview">
+                    </mat-form-field>
+                    <img [src]="imgPreview">
                 </div>
-                <div>
+                
+                <div style="margin-top: 10px;">
                     <button mat-raised-button color="accent" matStepperPrevious>Back</button>
                     <button mat-raised-button color="warn" mat-dialog-close style="margin-left: 10px;">cancel</button>
                     <button mat-raised-button color="primary" [mat-dialog-close]="studentForm"

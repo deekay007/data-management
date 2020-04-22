@@ -11,6 +11,7 @@ import { Student } from '../student.model';
 export class StudentsEditComponent implements OnInit {
 
   studentForm: FormGroup;
+  imgPreview: string = null;
 
   constructor(@Inject(MAT_DIALOG_DATA) public dataPassed: any) { }
 
