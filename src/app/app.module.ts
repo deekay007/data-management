@@ -19,6 +19,7 @@ import { SupportersComponent } from './supporters/supporters.component';
 import { ProfileComponent } from './profile/profile.component';
 import { StudentsEditComponent } from './students/students-edit/students-edit.component';
 import { AlertComponent } from './shared/alert/alert.component';
+import { VolunteersEditComponent } from './volunteers/volunteers-edit/volunteers-edit.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AlertComponent } from './shared/alert/alert.component';
     SupportersComponent,
     ProfileComponent,
     StudentsEditComponent,
-    AlertComponent
+    AlertComponent,
+    VolunteersEditComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,6 @@ import { AlertComponent } from './shared/alert/alert.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [StudentsEditComponent]
+  entryComponents: [StudentsEditComponent, VolunteersEditComponent]
 })
 export class AppModule { }

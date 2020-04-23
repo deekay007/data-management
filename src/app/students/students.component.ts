@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentsEditComponent } from './students-edit/students-edit.component';
 import { StudentsService } from '../shared/students.service';
@@ -6,16 +6,19 @@ import { Student } from './student.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.css']
 })
-export class StudentsComponent implements OnInit, AfterViewInit {
+export class StudentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   showAlert: boolean = false;
   index: number;
+
+  studentSubs : Subscription;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -26,7 +29,7 @@ export class StudentsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.dataSource.data = this.studentsService.getStudents();
-    this.studentsService.studentsListChanged.subscribe(students => {
+    this.studentSubs = this.studentsService.studentsListChanged.subscribe(students => {
       this.dataSource.data = students
     })
   }
@@ -34,6 +37,10 @@ export class StudentsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(){
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy(){
+    this.studentSubs.unsubscribe();
   }
 
   doFilter(filterValue){
@@ -74,7 +81,9 @@ export class StudentsComponent implements OnInit, AfterViewInit {
     })
   }
 
-  onShowDetails(index: number) {
+  onShowDetails(aadharNumber: string) {
+
+    const index = this.studentsService.searchStudent(aadharNumber);
     const editDialog = this.matDialog.open(StudentsEditComponent, {
       data: {
         editMode: true,
@@ -109,9 +118,9 @@ export class StudentsComponent implements OnInit, AfterViewInit {
     })
   }
 
-  onDeleteButtonClicked(index: number){
+  onDeleteButtonClicked(aadharNumber: string){
     this.showAlert = true;
-    this.index = index;
+    this.index = this.studentsService.searchStudent(aadharNumber);
   }
 
   deleteDetails(event){

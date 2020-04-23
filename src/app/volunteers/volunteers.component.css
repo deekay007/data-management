@@ -1,0 +1,30 @@
+table{
+    width: 100%;
+    background-color: #2B3054;
+    color: white;
+    padding: 0;
+    margin: 0;
+}
+
+td, th{
+    color: white;
+}
+
+.search-field{
+    background-color: #2B3054;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 2px solid white;
+    font-size: 15px;
+    color: white;
+}
+
+::placeholder{
+    color: white;
+}
+
+mat-paginator{
+    background-color: #2B3054;
+    color: white;
+}

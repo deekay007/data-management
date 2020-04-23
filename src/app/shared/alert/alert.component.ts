@@ -5,19 +5,24 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
     templateUrl: './alert.component.html',
     styleUrls: ['./alert.component.css']
 })
-export class AlertComponent{
+export class AlertComponent {
 
-    @Input() message:string;
+    @Input() message: string;
     @Output() studentDeleteResponse = new EventEmitter<boolean>();
+    @Output() volunteerDeleteResponse = new EventEmitter<boolean>();
 
-    onYesClick(){
-        if(this.message === 'student')
+    onYesClick() {
+        if (this.message === 'student')
             this.studentDeleteResponse.emit(true);
+        else if (this.message === 'volunteer')
+            this.volunteerDeleteResponse.emit(true);
     }
 
-    onNoClick(){
-        if(this.message === 'student')
+    onNoClick() {
+        if (this.message === 'student')
             this.studentDeleteResponse.emit(false);
+        else if (this.message === 'volunteer')
+            this.volunteerDeleteResponse.emit(false);
     }
 
 }

@@ -1,0 +1,133 @@
+<h1 mat-dialog-title>Add Volunteer</h1>
+
+<div mat-dialog-content>
+    <mat-horizontal-stepper>
+        <!-- personal details stepper -->
+        <form [formGroup]="volunteerForm">
+            <mat-step>
+                <ng-template matStepLabel>Fill personnal details</ng-template>
+                <div fxLayout fxLayoutGap="20px">
+                    <div fxFlex=100>
+                        <div fxLayout>
+                            <mat-form-field fxFlex=100>
+                                <input type="text" placeholder="Name" matInput pattern="^[a-zA-Z ]*$" formControlName="name">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout fxLayoutGap="20px">
+                            <mat-form-field fxFlex=34>
+                                <mat-label>Gender</mat-label>
+                                <mat-select formControlName="gender">
+                                    <mat-option value="male">Male</mat-option>
+                                    <mat-option value="female">Female</mat-option>
+                                    <mat-option value="others">Others</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field fxFlex=33>
+                                <input type="text" placeholder="Blood Group" matInput
+                                    pattern="^(A|B|AB|O|a|b|ab|o)[+-]" formControlName="bloodGroup">
+                            </mat-form-field>
+                            <mat-form-field fxFlex=33>
+                                <input matInput [matDatepicker]="picker" placeholder="Date of Birth" formControlName="dob">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout fxLayoutGap="20px">
+                            <mat-form-field fxFlex=20>
+                                <input type="text" placeholder="Batch" matInput pattern="^[2][0][0-2][0-9]$" formControlName="batch">
+                            </mat-form-field>
+                            <mat-form-field fxFlex=40>
+                                <input type="text" placeholder="Branch" matInput formControlName="branch">
+                            </mat-form-field>
+                            <mat-form-field fxFlex=40>
+                                <input type="text" placeholder="Responsibility" matInput formControlName="responsibility">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout fxLayoutGap="20px">
+                            <mat-form-field fxFlex=50>
+                                <input type="text" placeholder="Company Name" matInput pattern="^[a-zA-Z ]*$" formControlName="companyName">
+                            </mat-form-field>
+                            <mat-form-field fxFlex=50>
+                                <input type="text" placeholder="Job Location" matInput formControlName="jobLocation">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout fxLayoutGap="20px">
+                            <mat-form-field fxFlex=50>
+                                <input type="text" placeholder="Aadhar No" matInput formControlName="aadharNumber">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                </div>
+            </mat-step>
+
+            <!-- Family details stepper -->
+            <mat-step>
+                <ng-template matStepLabel>Fill family details</ng-template>
+                <div FxLayout fxLayoutGap="20px">
+                    <div fxFlex=100>
+                        <div fxLayout fxLayoutGap="20px">
+                            <mat-form-field fxFlex=50>
+                                <input type="text" placeholder="Mother's Name" matInput formControlName="mothersName"
+                                    pattern="^[a-zA-Z ]*$">
+                            </mat-form-field>
+                            <mat-form-field fxFlex=50>
+                                <input type="text" placeholder="Father's Name" matInput formControlName="fathersName"
+                                    pattern="^[a-zA-Z ]*$">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout>
+                            <mat-form-field fxFlex=100>
+                                <input type="text" placeholder="Address" matInput formControlName="address">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout fxLayoutGap="20px">
+                            <mat-form-field fxFlex=34>
+                                <input type="text" placeholder="Locality" matInput formControlName="locality"
+                                    pattern="^[a-zA-Z ]*$">
+                            </mat-form-field>
+                            <mat-form-field fxFlex=33>
+                                <input type="text" placeholder="PIN Code" matInput formControlName="pincode"
+                                    pattern="^[0-9]{6}$">
+                            </mat-form-field>
+                            <mat-form-field fxFlex=33>
+                                <input type="text" placeholder="Mobile Number" matInput formControlName="mobileNumber"
+                                    pattern="^[0-9]{10}$">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+                    <button mat-raised-button color="primary" matStepperNext style="margin-left: 10px;">Next</button>
+                </div>
+            </mat-step>
+
+            <!-- Upload docs and submit -->
+            <mat-step>
+                <ng-template matStepLabel>Upload and save</ng-template>
+                <div *ngIf="dataPassed.editMode" fxLayout="column">
+                    <mat-form-field>
+                        <input type="text" matInput formControlName="imagePath">
+                    </mat-form-field>
+                    <img [src]="dataPassed.volunteer.imagePath">
+                </div>
+                <div *ngIf="!dataPassed.editMode" fxLayout="column">
+                    <mat-form-field>
+                        <input type="text" matInput formControlName="imagePath" placeholder="Image path"
+                            [(ngModel)]="imgPreview">
+                    </mat-form-field>
+                    <img [src]="imgPreview">
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+                    <button mat-raised-button color="warn" mat-dialog-close style="margin-left: 10px;">cancel</button>
+                    <button mat-raised-button color="primary" [mat-dialog-close]="volunteerForm" style="margin-left: 10px;">Add</button>
+                </div>
+            </mat-step>
+        </form>
+    </mat-horizontal-stepper>
+</div>
