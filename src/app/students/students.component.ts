@@ -15,14 +15,15 @@ import { Subscription } from 'rxjs';
 })
 export class StudentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  alertMessage: string;
   showAlert: boolean = false;
   index: number;
 
-  studentSubs : Subscription;
+  studentSubs: Subscription;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['serialNumber', 'name', 'fathersName', 'gender', 'dob', 'contact', 'locality','showDetails', 'deleteDetails'];
+  displayedColumns: string[] = ['serialNumber', 'name', 'fathersName', 'gender', 'dob', 'contact', 'locality', 'showDetails', 'deleteDetails'];
   dataSource = new MatTableDataSource<Student>();
 
   constructor(private matDialog: MatDialog, private studentsService: StudentsService) { }
@@ -34,16 +35,16 @@ export class StudentsComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.studentSubs.unsubscribe();
   }
 
-  doFilter(filterValue){
+  doFilter(filterValue) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
@@ -53,36 +54,19 @@ export class StudentsComponent implements OnInit, AfterViewInit, OnDestroy {
         editMode: false
       }
     });
-
     addDialog.afterClosed().subscribe(student => {
       if (student) {
-
-        this.studentsService.addStudent({
-          name: student.value.name,
-          category: student.value.category,
-          bloodGroup: student.value.bloodGroup,
-          dob: student.value.dob,
-          schoolName: student.value.schoolName,
-          yearOfJoining: student.value.yearOfJoining,
-          aadharNumber: student.value.aadharNumber,
-          gender: student.value.gender,
-          sponsored: student.value.sponsored,
-          sponsoredYear: student.value.sponsoredYear,
-          mothersName: student.value.mothersName,
-          fathersName: student.value.fathersName,
-          address: student.value.address,
-          locality: student.value.locality,
-          pincode: student.value.pincode,
-          mobileNumber: student.value.mobileNumber,
-          fathersAadharNumber: student.value.fathersAadharNumber,
-          imagePath: student.value.imagePath
-        });
+        const index = this.studentsService.searchStudent(student.value.aadharNumber);
+        if (index !== -1) {
+          this.alertMessage = 'duplicate';
+          this.showAlert = true;
+        } else
+          this.studentsService.addStudent(this.newStudent(student));
       }
-    })
+    });
   }
 
   onShowDetails(aadharNumber: string) {
-
     const index = this.studentsService.searchStudent(aadharNumber);
     const editDialog = this.matDialog.open(StudentsEditComponent, {
       data: {
@@ -90,43 +74,50 @@ export class StudentsComponent implements OnInit, AfterViewInit, OnDestroy {
         student: this.dataSource.data[index]
       }
     });
-
     editDialog.afterClosed().subscribe(student => {
       if (student) {
-
-        this.studentsService.editStudent(index, {
-          name: student.value.name,
-          category: student.value.category,
-          bloodGroup: student.value.bloodGroup,
-          dob: student.value.dob,
-          schoolName: student.value.schoolName,
-          yearOfJoining: student.value.yearOfJoining,
-          aadharNumber: student.value.aadharNumber,
-          gender: student.value.gender,
-          sponsored: student.value.sponsored,
-          sponsoredYear: student.value.sponsoredYear,
-          mothersName: student.value.mothersName,
-          fathersName: student.value.fathersName,
-          address: student.value.address,
-          locality: student.value.locality,
-          pincode: student.value.pincode,
-          mobileNumber: student.value.mobileNumber,
-          fathersAadharNumber: student.value.fathersAadharNumber,
-          imagePath: student.value.imagePath
-        });
+        this.studentsService.editStudent(index, this.newStudent(student));
       }
-    })
+    });
   }
 
-  onDeleteButtonClicked(aadharNumber: string){
+  newStudent(student) {
+    return {
+      name: student.value.name,
+      category: student.value.category,
+      bloodGroup: student.value.bloodGroup,
+      dob: student.value.dob,
+      schoolName: student.value.schoolName,
+      yearOfJoining: student.value.yearOfJoining,
+      aadharNumber: student.value.aadharNumber,
+      gender: student.value.gender,
+      sponsored: student.value.sponsored,
+      sponsoredYear: student.value.sponsoredYear,
+      mothersName: student.value.mothersName,
+      fathersName: student.value.fathersName,
+      address: student.value.address,
+      locality: student.value.locality,
+      pincode: student.value.pincode,
+      mobileNumber: student.value.mobileNumber,
+      fathersAadharNumber: student.value.fathersAadharNumber,
+      imagePath: student.value.imagePath
+    }
+  }
+
+  onDeleteButtonClicked(aadharNumber: string) {
     this.showAlert = true;
+    this.alertMessage = 'student';
     this.index = this.studentsService.searchStudent(aadharNumber);
   }
 
-  deleteDetails(event){
-    if(event)
+  deleteDetails(event) {
+    if (event)
       this.studentsService.deleteStudent(this.index);
 
+    this.showAlert = false;
+  }
+
+  duplicateDataMessage(){
     this.showAlert = false;
   }
 

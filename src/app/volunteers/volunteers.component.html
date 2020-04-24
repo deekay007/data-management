@@ -1,4 +1,4 @@
-<app-alert [message]="'volunteer'" *ngIf="showAlert" (volunteerDeleteResponse)="deleteDetails($event)"></app-alert>
+<app-alert [message]="alertMessage" *ngIf="showAlert" (volunteerDeleteResponse)="deleteDetails($event)" (duplicateData)="duplicateDataMessage()"></app-alert>
 
 <div>
     <h1 style="color: white; font-size: 40px; padding: 0; margin:0">Volunteers</h1>
@@ -73,6 +73,6 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator #paginator [pageSize]="3" [pageSizeOptions]="[5, 10, 25, 100]">
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]">
     </mat-paginator>
 </div>

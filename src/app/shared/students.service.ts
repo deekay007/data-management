@@ -26,9 +26,8 @@ export class StudentsService {
     }
 
     addStudent(student: Student) {
-        console.log(student);
+        // console.log(student);
         this.students.push(student);
-
         this.studentsListChanged.emit(this.students);
     }
     

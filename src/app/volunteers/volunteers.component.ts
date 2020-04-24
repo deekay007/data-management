@@ -14,11 +14,11 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class VolunteersComponent implements OnInit, AfterViewInit {
 
-  // message: string = 'volunteer';
-  index:number;
+  alertMessage: string;
+  index: number;
   showAlert: boolean = false;
 
-  displayedColumns: string[] = ['serialNumber', 'name', 'branch', 'batch', 'responsibility', 'contact', 'locality','showDetails', 'deleteDetails'];
+  displayedColumns: string[] = ['serialNumber', 'name', 'branch', 'batch', 'responsibility', 'contact', 'locality', 'showDetails', 'deleteDetails'];
   volunteerList = new MatTableDataSource<Volunteer>();
 
   @ViewChild(MatSort) sort: MatSort;
@@ -33,12 +33,12 @@ export class VolunteersComponent implements OnInit, AfterViewInit {
     })
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.volunteerList.sort = this.sort;
     this.volunteerList.paginator = this.paginator;
   }
 
-  doFilter(filterValue){
+  doFilter(filterValue) {
     this.volunteerList.filter = filterValue.trim().toLowerCase();
   }
 
@@ -48,36 +48,18 @@ export class VolunteersComponent implements OnInit, AfterViewInit {
         editMode: false
       }
     });
-
     addDialog.afterClosed().subscribe(volunteer => {
       if (volunteer) {
-
-        // const index = this.volunteersService.searchVolunteer(volunteer.aadharNumber);
-
-        // if(index === -1)
-
-
-        this.volunteersService.addVolunteer({
-          name: volunteer.value.name,
-          gender: volunteer.value.gender,
-          bloodGroup: volunteer.value.bloodGroup,
-          dob: volunteer.value.dob,
-          batch: volunteer.value.batch,
-          branch: volunteer.value.branch,
-          companyName: volunteer.value.companyName,
-          jobLocation: volunteer.value.jobLocation,
-          responsibility: volunteer.value.responsibility,
-          aadharNumber: volunteer.value.aadharNumber,
-          fathersName: volunteer.value.fathersName,
-          mothersName: volunteer.value.mobileNumber,
-          address: volunteer.value.address,
-          locality: volunteer.value.locality,
-          pincode: volunteer.value.pincode,
-          mobileNumber: volunteer.value.mobileNumber,
-          imagePath: volunteer.value.imagePath
-        });
+        const index = this.volunteersService.searchVolunteer(volunteer.value.aadharNumber);
+        console.log(index);
+        if (index !== -1){
+          this.alertMessage = 'duplicate';
+          this.showAlert = true;
+        } else{
+          this.volunteersService.addVolunteer(this.newVolunteer(volunteer));
+        }
       }
-    })
+    });
   }
 
   onShowDetails(aadharNumber: string) {
@@ -88,41 +70,48 @@ export class VolunteersComponent implements OnInit, AfterViewInit {
         volunteer: this.volunteerList.data[index]
       }
     });
-
     editDialog.afterClosed().subscribe(volunteer => {
       if (volunteer) {
-
-        this.volunteersService.editVolunteer(index, {
-          name: volunteer.value.name,
-          gender: volunteer.value.gender,
-          bloodGroup: volunteer.value.bloodGroup,
-          dob: volunteer.value.dob,
-          batch: volunteer.value.batch,
-          branch: volunteer.value.branch,
-          companyName: volunteer.value.companyName,
-          jobLocation: volunteer.value.jobLocation,
-          responsibility: volunteer.value.responsibility,
-          aadharNumber: volunteer.value.aadharNumber,
-          fathersName: volunteer.value.fathersName,
-          mothersName: volunteer.value.mothersName,
-          address: volunteer.value.address,
-          locality: volunteer.value.locality,
-          pincode: volunteer.value.pincode,
-          mobileNumber: volunteer.value.mobileNumber,
-          imagePath: volunteer.value.imagePath
-        });
+        this.volunteersService.editVolunteer(index, this.newVolunteer(volunteer));
       }
     })
   }
 
-  onDeleteButtonClicked(aadharNumber: string){
+  newVolunteer(volunteer) {
+    return {
+      name: volunteer.value.name,
+      gender: volunteer.value.gender,
+      bloodGroup: volunteer.value.bloodGroup,
+      dob: volunteer.value.dob,
+      batch: volunteer.value.batch,
+      branch: volunteer.value.branch,
+      companyName: volunteer.value.companyName,
+      jobLocation: volunteer.value.jobLocation,
+      responsibility: volunteer.value.responsibility,
+      aadharNumber: volunteer.value.aadharNumber,
+      fathersName: volunteer.value.fathersName,
+      mothersName: volunteer.value.mothersName,
+      address: volunteer.value.address,
+      locality: volunteer.value.locality,
+      pincode: volunteer.value.pincode,
+      mobileNumber: volunteer.value.mobileNumber,
+      imagePath: volunteer.value.imagePath
+    }
+  }
+
+  onDeleteButtonClicked(aadharNumber: string) {
     this.showAlert = true;
+    this.alertMessage = 'volunteer';
     this.index = this.volunteersService.searchVolunteer(aadharNumber);
   }
 
-  deleteDetails(event){
-    if(event)
+  deleteDetails(event) {
+    if (event)
       this.volunteersService.deleteVolunteer(this.index);
+    this.showAlert = false;
+  }
+
+  duplicateDataMessage(){
     this.showAlert = false;
   }
 

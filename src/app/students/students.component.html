@@ -1,4 +1,4 @@
-<app-alert [message]="'student'" *ngIf="showAlert" (studentDeleteResponse)="deleteDetails($event)"></app-alert>
+<app-alert [message]="alertMessage" *ngIf="showAlert" (studentDeleteResponse)="deleteDetails($event)" (duplicateData)="duplicateDataMessage()"></app-alert>
 
 <div>
     <h1 style="color: white; font-size: 40px; padding: 0; margin:0">Students</h1>

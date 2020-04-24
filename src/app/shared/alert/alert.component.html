@@ -1,10 +1,11 @@
 <div class="backdrop" (click)="onNoClick()"></div>
 
 <div class="alert-box">
-    <p>Are you sure before deleting this {{message}}</p>
+    <p *ngIf="message !== 'duplicate'; else elseBlock">Are you sure before deleting this {{message}}</p>
+    <ng-template #elseBlock>Duplicate data entered. Data exists!!</ng-template>
     <hr>
     <div class="buttons">
-        <button mat-raised-button color="warn" (click)="onYesClick()">Yes</button>
-        <button mat-raised-button color="primary" (click)="onNoClick()">No</button>
+        <button mat-raised-button color="warn" (click)="onYesClick()">{{ message !== 'duplicate' ? 'Yes' : 'Ok' }}</button>
+        <button mat-raised-button color="primary" (click)="onNoClick()" *ngIf="message !== 'duplicate'">No</button>
     </div>
 </div>
