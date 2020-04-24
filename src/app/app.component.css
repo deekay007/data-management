@@ -1,4 +1,4 @@
-mat-sidenav-container, mat-sidenav, mat-sidenav-content {
+mat-sidenav-container, mat-sidenav, mat-sidenav-content, router-outlet {
     height: 100%;
 }
 
@@ -7,7 +7,7 @@ mat-sidenav {
     background-color: #2B3054;
 }
 
-main {
+main, router-outlet{
     background-color: #1A233A;
     height: 100%;
     padding: 30px;

@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>Add Blood Donor</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="donorForm">
+        <div fxLayout fxLayoutGap="20px">
+            <div fxFlex=100>
+                <div fxLayout>
+                    <mat-form-field fxFlex=100>
+                        <input type="text" placeholder="Name" matInput pattern="^[a-zA-Z ]*$" formControlName="name">
+                    </mat-form-field>
+                </div>
+                <div fxLayout fxLayoutGap="20px">
+                    <mat-form-field fxFlex=50>
+                        <mat-label>Gender</mat-label>
+                        <mat-select formControlName="gender">
+                            <mat-option value="male">Male</mat-option>
+                            <mat-option value="female">Female</mat-option>
+                            <mat-option value="others">Others</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field fxFlex=50>
+                        <input type="text" placeholder="Blood Group" matInput pattern="^(A|B|AB|O|a|b|ab|o)[+-]"
+                            formControlName="bloodGroup">
+                    </mat-form-field>
+                </div>
+                <div fxLayout fxLayoutGap="20px">
+                    <mat-form-field fxFlex=50>
+                        <input type="text" placeholder="Batch" matInput pattern="^[2][0][0-2][0-9]$"
+                            formControlName="batch">
+                    </mat-form-field>
+                    <mat-form-field fxFlex=50>
+                        <input type="text" placeholder="Branch" matInput formControlName="branch">
+                    </mat-form-field>
+                </div>
+                <div fxLayout fxLayoutGap="20px">
+                    <mat-form-field fxFlex=50>
+                        <input type="text" placeholder="Mobile Number" matInput formControlName="mobileNumber">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button color="warn" style="margin-right: 20px;" mat-dialog-close>Cancel</button>
+                    <button mat-raised-button color="primary" [mat-dialog-close]="donorForm">Add</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

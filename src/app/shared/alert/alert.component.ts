@@ -10,6 +10,7 @@ export class AlertComponent {
     @Input() message: string;
     @Output() studentDeleteResponse = new EventEmitter<boolean>();
     @Output() volunteerDeleteResponse = new EventEmitter<boolean>();
+    @Output() donorDeleteResponse = new EventEmitter<boolean>();
     @Output() duplicateData = new EventEmitter<void>();
 
     onYesClick() {
@@ -17,7 +18,9 @@ export class AlertComponent {
             this.studentDeleteResponse.emit(true);
         else if (this.message === 'volunteer')
             this.volunteerDeleteResponse.emit(true);
-        else if(this.message === 'duplicate')
+        else if (this.message === 'donor')
+            this.donorDeleteResponse.emit(true);
+        else if (this.message === 'duplicate')
             this.duplicateData.emit();
     }
 
@@ -26,7 +29,9 @@ export class AlertComponent {
             this.studentDeleteResponse.emit(false);
         else if (this.message === 'volunteer')
             this.volunteerDeleteResponse.emit(false);
-        else if(this.message === 'duplicate')
+        else if (this.message === 'donor')
+            this.donorDeleteResponse.emit(false);
+        else if (this.message === 'duplicate')
             this.duplicateData.emit();
     }
 

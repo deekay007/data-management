@@ -20,6 +20,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { StudentsEditComponent } from './students/students-edit/students-edit.component';
 import { AlertComponent } from './shared/alert/alert.component';
 import { VolunteersEditComponent } from './volunteers/volunteers-edit/volunteers-edit.component';
+import { BloodDonorsEditComponent } from './blood-donors/blood-donors-edit/blood-donors-edit.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { VolunteersEditComponent } from './volunteers/volunteers-edit/volunteers
     ProfileComponent,
     StudentsEditComponent,
     AlertComponent,
-    VolunteersEditComponent
+    VolunteersEditComponent,
+    BloodDonorsEditComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,6 @@ import { VolunteersEditComponent } from './volunteers/volunteers-edit/volunteers
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [StudentsEditComponent, VolunteersEditComponent]
+  entryComponents: [StudentsEditComponent, VolunteersEditComponent, BloodDonorsEditComponent]
 })
 export class AppModule { }

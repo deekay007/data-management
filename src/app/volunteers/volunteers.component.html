@@ -1,19 +1,20 @@
-<app-alert [message]="alertMessage" *ngIf="showAlert" (volunteerDeleteResponse)="deleteDetails($event)" (duplicateData)="duplicateDataMessage()"></app-alert>
+<app-alert [message]="alertMessage" *ngIf="showAlert" (volunteerDeleteResponse)="deleteDetails($event)"
+    (duplicateData)="duplicateDataMessage()"></app-alert>
 
 <div>
     <h1 style="color: white; font-size: 40px; padding: 0; margin:0">Volunteers</h1>
     <p style="color: white; padding-top: 20px;">This section consist of details of every volunteers studying in Prayaas
         India. You can see every details of
         that volunteer by clicking on the details button for a particular volunteer in the table.</p>
-    <button mat-raised-button style="background-color: #1B55E2; color: white; padding: 1px 20px;"
-        (click)="onAddVolunteer()">
-        <mat-icon>add</mat-icon> Add Volunteer
-    </button>
 </div>
 
 <div style="margin-top: 30px;">
 
-    <div fxLayout>
+    <div fxLayout="row" fxLayoutAlign="space-between end">
+        <button mat-raised-button style="background-color: #1B55E2; color: white; padding: 3px 20px; margin-bottom: 20px;"
+            (click)="onAddVolunteer()">
+            <mat-icon>add</mat-icon> Add Volunteer
+        </button>
         <input type="text" (keyup)="doFilter($event.target.value)" placeholder="Search" class="search-field">
     </div>
 
@@ -61,12 +62,13 @@
         <ng-container matColumnDef="showDetails">
             <th mat-header-cell *matHeaderCellDef> Show Details </th>
             <td mat-cell *matCellDef="let element; let i = index"> <button mat-raised-button color="primary"
-                (click)="onShowDetails(element.aadharNumber)">Click Here</button> </td>
+                    (click)="onShowDetails(element.aadharNumber)">Click Here</button> </td>
         </ng-container>
 
         <ng-container matColumnDef="deleteDetails">
             <th mat-header-cell *matHeaderCellDef> Delete Details </th>
-            <td mat-cell *matCellDef="let element; let i = index"> <button mat-raised-button color="warn" (click)="onDeleteButtonClicked(element.aadharNumber)">Delete</button> </td>
+            <td mat-cell *matCellDef="let element; let i = index"> <button mat-raised-button color="warn"
+                    (click)="onDeleteButtonClicked(element.aadharNumber)">Delete</button> </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

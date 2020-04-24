@@ -1,19 +1,20 @@
-<app-alert [message]="alertMessage" *ngIf="showAlert" (studentDeleteResponse)="deleteDetails($event)" (duplicateData)="duplicateDataMessage()"></app-alert>
+<app-alert [message]="alertMessage" *ngIf="showAlert" (studentDeleteResponse)="deleteDetails($event)"
+    (duplicateData)="duplicateDataMessage()"></app-alert>
 
 <div>
     <h1 style="color: white; font-size: 40px; padding: 0; margin:0">Students</h1>
     <p style="color: white; padding-top: 20px;">This section consist of details of every student studying in Prayaas
         India. You can see every details of
         that child by clicking on the details button for a particular student in the table.</p>
-    <button mat-raised-button style="background-color: #1B55E2; color: white; padding: 1px 20px;"
-        (click)="onAddStudent()">
-        <mat-icon>add</mat-icon> Add Student
-    </button>
+
 </div>
 
-<div style="margin: 30px;">
+<div style="margin: 30px 0;">
 
-    <div fxLayout>
+    <div fxLayout fxLayoutAlign="space-between">
+        <button mat-raised-button style="background-color: #1B55E2; color: white; padding: 2px 20px; margin-bottom: 20px;" (click)="onAddStudent()">
+            <mat-icon>add</mat-icon> Add Student
+        </button>
         <input type="text" (keyup)="doFilter($event.target.value)" placeholder="Search" class="search-field">
     </div>
 

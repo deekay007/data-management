@@ -21,14 +21,15 @@ mat-icon{
 }
 
 #header-text{
-    font-size: 24px;
+    font-size: 23px;
     color: white;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .logo{
-    width: 75%;
+    width: 60%;
     display: block;
     margin: 10px auto 0;
 }

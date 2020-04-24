@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartType, ChartOptions } from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 import { StudentsService } from '../shared/students.service';
+import { VolunteersService } from '../shared/volunteers.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,7 @@ import { StudentsService } from '../shared/students.service';
 export class DashboardComponent implements OnInit {
 
   numberStudents: number = 0;
+  numberVolunteers: number = 0;
 
   ngOnInit(): void {
   }
@@ -24,11 +26,13 @@ export class DashboardComponent implements OnInit {
   public pieChartLegend = true;
   public pieChartPlugins = [];
 
-  constructor( private studentsService: StudentsService) {
+  constructor( private studentsService: StudentsService,
+                private volunteersService: VolunteersService) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
 
     this.numberStudents = this.studentsService.noOfStudents();
+    this.numberVolunteers = this.volunteersService.noOfVolunteers();
   }
 
 }
