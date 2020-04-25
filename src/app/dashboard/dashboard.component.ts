@@ -3,6 +3,8 @@ import { ChartType, ChartOptions } from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 import { StudentsService } from '../shared/students.service';
 import { VolunteersService } from '../shared/volunteers.service';
+import { BloodDonorsService } from '../shared/blood-donors.service';
+import { SupportersService } from '../shared/supporters.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +15,8 @@ export class DashboardComponent implements OnInit {
 
   numberStudents: number = 0;
   numberVolunteers: number = 0;
+  numberDonors: number = 0;
+  numberSupporters: number = 0;
 
   ngOnInit(): void {
   }
@@ -27,12 +31,16 @@ export class DashboardComponent implements OnInit {
   public pieChartPlugins = [];
 
   constructor( private studentsService: StudentsService,
-                private volunteersService: VolunteersService) {
+                private volunteersService: VolunteersService,
+                private donorService: BloodDonorsService,
+                private supportersService: SupportersService) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
 
     this.numberStudents = this.studentsService.noOfStudents();
     this.numberVolunteers = this.volunteersService.noOfVolunteers();
+    this.numberDonors = this.donorService.noOfBloodDonors();
+    this.numberSupporters = this.supportersService.noOfSupporters();
   }
 
 }

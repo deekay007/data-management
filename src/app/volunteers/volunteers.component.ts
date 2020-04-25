@@ -56,7 +56,7 @@ export class VolunteersComponent implements OnInit, AfterViewInit {
           this.alertMessage = 'duplicate';
           this.showAlert = true;
         } else{
-          this.volunteersService.addVolunteer(this.newVolunteer(volunteer));
+          this.volunteersService.addVolunteer(volunteer.value);
         }
       }
     });
@@ -72,31 +72,9 @@ export class VolunteersComponent implements OnInit, AfterViewInit {
     });
     editDialog.afterClosed().subscribe(volunteer => {
       if (volunteer) {
-        this.volunteersService.editVolunteer(index, this.newVolunteer(volunteer));
+        this.volunteersService.editVolunteer(index, volunteer.value);
       }
     })
-  }
-
-  newVolunteer(volunteer) {
-    return {
-      name: volunteer.value.name,
-      gender: volunteer.value.gender,
-      bloodGroup: volunteer.value.bloodGroup,
-      dob: volunteer.value.dob,
-      batch: volunteer.value.batch,
-      branch: volunteer.value.branch,
-      companyName: volunteer.value.companyName,
-      jobLocation: volunteer.value.jobLocation,
-      responsibility: volunteer.value.responsibility,
-      aadharNumber: volunteer.value.aadharNumber,
-      fathersName: volunteer.value.fathersName,
-      mothersName: volunteer.value.mothersName,
-      address: volunteer.value.address,
-      locality: volunteer.value.locality,
-      pincode: volunteer.value.pincode,
-      mobileNumber: volunteer.value.mobileNumber,
-      imagePath: volunteer.value.imagePath
-    }
   }
 
   onDeleteButtonClicked(aadharNumber: string) {

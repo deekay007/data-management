@@ -61,7 +61,7 @@ export class StudentsComponent implements OnInit, AfterViewInit, OnDestroy {
           this.alertMessage = 'duplicate';
           this.showAlert = true;
         } else
-          this.studentsService.addStudent(this.newStudent(student));
+          this.studentsService.addStudent(student.value);
       }
     });
   }
@@ -76,32 +76,9 @@ export class StudentsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     editDialog.afterClosed().subscribe(student => {
       if (student) {
-        this.studentsService.editStudent(index, this.newStudent(student));
+        this.studentsService.editStudent(index, student.value);
       }
     });
-  }
-
-  newStudent(student) {
-    return {
-      name: student.value.name,
-      category: student.value.category,
-      bloodGroup: student.value.bloodGroup,
-      dob: student.value.dob,
-      schoolName: student.value.schoolName,
-      yearOfJoining: student.value.yearOfJoining,
-      aadharNumber: student.value.aadharNumber,
-      gender: student.value.gender,
-      sponsored: student.value.sponsored,
-      sponsoredYear: student.value.sponsoredYear,
-      mothersName: student.value.mothersName,
-      fathersName: student.value.fathersName,
-      address: student.value.address,
-      locality: student.value.locality,
-      pincode: student.value.pincode,
-      mobileNumber: student.value.mobileNumber,
-      fathersAadharNumber: student.value.fathersAadharNumber,
-      imagePath: student.value.imagePath
-    }
   }
 
   onDeleteButtonClicked(aadharNumber: string) {

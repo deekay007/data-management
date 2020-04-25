@@ -21,6 +21,7 @@ import { StudentsEditComponent } from './students/students-edit/students-edit.co
 import { AlertComponent } from './shared/alert/alert.component';
 import { VolunteersEditComponent } from './volunteers/volunteers-edit/volunteers-edit.component';
 import { BloodDonorsEditComponent } from './blood-donors/blood-donors-edit/blood-donors-edit.component';
+import { SupportersEditComponent } from './supporters/supporters-edit/supporters-edit.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { BloodDonorsEditComponent } from './blood-donors/blood-donors-edit/blood
     StudentsEditComponent,
     AlertComponent,
     VolunteersEditComponent,
-    BloodDonorsEditComponent
+    BloodDonorsEditComponent,
+    SupportersEditComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,6 @@ import { BloodDonorsEditComponent } from './blood-donors/blood-donors-edit/blood
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [StudentsEditComponent, VolunteersEditComponent, BloodDonorsEditComponent]
+  entryComponents: [StudentsEditComponent, VolunteersEditComponent, BloodDonorsEditComponent, SupportersEditComponent]
 })
 export class AppModule { }

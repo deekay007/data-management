@@ -52,14 +52,7 @@ export class BloodDonorsComponent implements OnInit, AfterViewInit {
           this.alertMessage = 'duplicate';
           this.showAlert = true;
         } else {
-          this.bloodDonorService.addBloodDonor({
-            name: donor.value.name,
-            gender: donor.value.gender,
-            bloodGroup: donor.value.bloodGroup,
-            batch: donor.value.batch,
-            branch: donor.value.branch,
-            mobileNumber: donor.value.mobileNumber
-          })
+          this.bloodDonorService.addBloodDonor(donor.value)
         }
       }
     })

@@ -1,0 +1,60 @@
+<h1 mat-dialog-title>{{ dataPassed.editMode ? 'Edit' : 'Add' }} Member</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="supporterForm">
+        <div fxLayout fxLayoutGap="20px">
+            <div fxFlex=100>
+                <div fxLayout>
+                    <mat-form-field fxFlex=100>
+                        <input type="text" placeholder="Name" matInput pattern="^[a-zA-Z ]*$" formControlName="name">
+                    </mat-form-field>
+                </div>
+                <div fxLayout fxLayoutGap="20px">
+                    <mat-form-field fxFlex=30>
+                        <mat-label>Gender</mat-label>
+                        <mat-select formControlName="gender">
+                            <mat-option value="male">Male</mat-option>
+                            <mat-option value="female">Female</mat-option>
+                            <mat-option value="others">Others</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field fxFlex=35>
+                        <input type="text" placeholder="Organisation" matInput formControlName="organisationName">
+                    </mat-form-field>
+                    <mat-form-field fxFlex=35>
+                        <input type="text" placeholder="position" matInput formControlName="position">
+                    </mat-form-field>
+                </div>
+                <div fxLayout fxLayoutGap="20px">
+                    <mat-form-field fxFlex=100>
+                        <input type="text" placeholder="Address" matInput formControlName="address">
+                    </mat-form-field>
+                </div>
+                <div fxLayout fxLayoutGap="20px">
+                    <mat-form-field fxFlex=33>
+                        <input type="text" placeholder="locality" matInput formControlName="locality">
+                    </mat-form-field>
+                    <mat-form-field fxFlex=33>
+                        <input matInput [matDatepicker]="picker" placeholder="Joining Date"
+                            formControlName="joiningDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field fxFlex=34>
+                        <input type="text" placeholder="Mobile Number" matInput formControlName="mobileNumber">
+                    </mat-form-field>
+                </div>
+                <div fxLayout fxLayoutGap="20px">
+                    <mat-form-field fxFlex=50>
+                        <input type="text" placeholder="Email" matInput formControlName="email">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button color="warn" style="margin-right: 20px;" mat-dialog-close>Cancel</button>
+                    <button mat-raised-button color="primary" [mat-dialog-close]="supporterForm"
+                        [disabled]="supporterForm.invalid">{{dataPassed.editMode ? 'Update' : 'Add'}}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
