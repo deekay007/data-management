@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Student } from '../student.model';
 
 @Component({
   selector: 'app-students-edit',
@@ -33,7 +32,7 @@ export class StudentsEditComponent implements OnInit {
       locality: new FormControl('', [Validators.required]),
       pincode: new FormControl('', [Validators.required]),
       mobileNumber: new FormControl('', [Validators.required]),
-      fathersAadharNumber: new FormControl('', [Validators.required]),
+      fathersAadharNumber: new FormControl(''),
       imagePath: new FormControl(null)
     })
 
@@ -44,26 +43,8 @@ export class StudentsEditComponent implements OnInit {
   }
 
   setValue(student) {
-    this.studentForm.setValue({
-      name: student.name,
-      category: student.category,
-      bloodGroup: student.bloodGroup,
-      dob: student.dob,
-      schoolName: student.schoolName,
-      yearOfJoining: student.yearOfJoining,
-      aadharNumber: student.aadharNumber,
-      gender: student.gender,
-      sponsored: student.sponsored,
-      sponsoredYear: student.sponsoredYear,
-      mothersName: student.mothersName,
-      fathersName: student.fathersName,
-      address: student.address,
-      locality: student.locality,
-      pincode: student.pincode,
-      mobileNumber: student.mobileNumber,
-      fathersAadharNumber: student.fathersAadharNumber,
-      imagePath: student.imagePath
-    })
+    this.studentForm.setValue(student);
   }
-  
+
+
 }

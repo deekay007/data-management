@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { Student } from '../students/student.model';
 
@@ -8,40 +9,60 @@ import { Student } from '../students/student.model';
 export class StudentsService {
 
     @Output() studentsListChanged = new EventEmitter<Student[]>();
+    length: number = 0;
 
-    private students: Student[] = [
-        { name: 'Deepak', category: 'obc', bloodGroup: 'O+', dob: new Date(), schoolName: 'dav', yearOfJoining: '2016', aadharNumber: '111122223333', gender: 'male', sponsored: 'no', sponsoredYear: '2016', mothersName: 'Meena Devi', fathersName: 'Santosh Kumar', address: 'Gomia', locality: 'gomia', pincode: '829111', mobileNumber: '7294880987', fathersAadharNumber: '111111111111', imagePath: 'https://i.pinimg.com/564x/04/bb/21/04bb2164bbfa3684118a442c17d086bf.jpg' },
-        { name: 'Vikram', category: 'obc', bloodGroup: 'O+', dob: new Date(), schoolName: 'dav', yearOfJoining: '2016', aadharNumber: '222211113333', gender: 'male', sponsored: 'no', sponsoredYear: null, mothersName: 'Meena Devi', fathersName: 'Santosh Kumar', address: 'Gomia', locality: 'godda', pincode: '829111', mobileNumber: '7294880987', fathersAadharNumber: '111111111111', imagePath: 'https://i.pinimg.com/564x/04/bb/21/04bb2164bbfa3684118a442c17d086bf.jpg' },
-        { name: 'Ajit', category: 'obc', bloodGroup: 'O+', dob: new Date(), schoolName: 'dav', yearOfJoining: '2016', aadharNumber: '333311112222', gender: 'male', sponsored: 'no', sponsoredYear: null, mothersName: 'Meena Devi', fathersName: 'Santosh Kumar', address: 'Gomia', locality: 'deoghar', pincode: '829111', mobileNumber: '7294880987', fathersAadharNumber: '111111111111', imagePath: 'https://i.pinimg.com/564x/04/bb/21/04bb2164bbfa3684118a442c17d086bf.jpg' },
-    ]
+    constructor(private http: HttpClient) { }
+
+    private students: Student[] = [];
 
     getStudents() {
+        this.httpGET();
         return this.students;
     }
 
     editStudent(index: number, student: Student) {
         this.students[index] = student;
         this.studentsListChanged.emit(this.students);
-        // console.log(student);
+        this.httpPOST();
     }
 
     addStudent(student: Student) {
         // console.log(student);
         this.students.push(student);
         this.studentsListChanged.emit(this.students);
+        this.httpPOST();
     }
-    
-    searchStudent(aadharNumber: string){
+
+    searchStudent(aadharNumber: string) {
         return this.students.findIndex(x => x.aadharNumber === aadharNumber);
     }
 
-    deleteStudent(index: number){
+    deleteStudent(index: number) {
         this.students.splice(index, 1);
         this.studentsListChanged.emit(this.students);
-
+        this.httpPOST();
     }
 
-    noOfStudents(){
-        return this.students.length;
+    noOfStudents() {
+        return this.length;
+    }
+
+    httpGET() {
+        this.http.get<Student[]>(
+            'https://data-management-d3b72.firebaseio.com/students.json'
+        ).subscribe(students => {
+            this.students = students;
+            this.length = this.students.length;
+            this.studentsListChanged.emit(this.students);
+        });
+    }
+
+    httpPOST() {
+        this.http.put(
+            'https://data-management-d3b72.firebaseio.com/students.json',
+            this.students
+        ).subscribe(response => {
+            console.log(response);
+        });
     }
 }

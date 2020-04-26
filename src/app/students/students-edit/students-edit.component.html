@@ -2,6 +2,7 @@
 
 <div mat-dialog-content>
     <mat-horizontal-stepper>
+
         <!-- personal details stepper -->
         <form [formGroup]="studentForm">
             <mat-step>
@@ -10,7 +11,8 @@
                     <div fxFlex=100>
                         <div fxLayout>
                             <mat-form-field fxFlex=100>
-                                <input type="text" placeholder="Name" matInput formControlName="name" pattern="^[a-zA-Z ]*$">
+                                <input type="text" placeholder="Name" matInput formControlName="name"
+                                    pattern="^[a-zA-Z ]*$">
                             </mat-form-field>
                         </div>
                         <div fxLayout fxLayoutGap="20px">
@@ -24,7 +26,8 @@
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field fxFlex=33>
-                                <input type="text" placeholder="Blood Group" matInput formControlName="bloodGroup" pattern="^(A|B|AB|O|a|b|ab|o)[+-]">
+                                <input type="text" placeholder="Blood Group" matInput formControlName="bloodGroup"
+                                    pattern="^(A|B|AB|O|a|b|ab|o)[+-]">
                             </mat-form-field>
                             <mat-form-field fxFlex=33>
                                 <input matInput [matDatepicker]="picker" placeholder="Date of Birth"
@@ -44,7 +47,8 @@
                                     formControlName="yearOfJoining" pattern="^[2][0][0-2][0-9]$">
                             </mat-form-field>
                             <mat-form-field fxFlex=50>
-                                <input type="text" placeholder="Aadhaar No" matInput formControlName="aadharNumber" pattern="^[0-9]{12}">
+                                <input type="text" placeholder="Aadhaar No" matInput formControlName="aadharNumber"
+                                    pattern="^[0-9]{12}">
                             </mat-form-field>
                         </div>
                         <div fxLayout fxLayoutGap="20px">
@@ -64,8 +68,7 @@
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field fxFlex=33>
-                                <input placeholder="Sponsored Year" type="text" matInput
-                                    formControlName="sponsoredYear" pattern="^[2][0][0-2][0-9]$">
+                                <input placeholder="Sponsored Year" type="text" matInput formControlName="sponsoredYear">
                             </mat-form-field>
                         </div>
                     </div>
@@ -82,10 +85,12 @@
                     <div fxFlex=100>
                         <div fxLayout fxLayoutGap="20px">
                             <mat-form-field fxFlex=50>
-                                <input type="text" placeholder="Mother's Name" matInput formControlName="mothersName" pattern="^[a-zA-Z ]*$">
+                                <input type="text" placeholder="Mother's Name" matInput formControlName="mothersName"
+                                    pattern="^[a-zA-Z ]*$">
                             </mat-form-field>
                             <mat-form-field fxFlex=50>
-                                <input type="text" placeholder="Father's Name" matInput formControlName="fathersName" pattern="^[a-zA-Z ]*$">
+                                <input type="text" placeholder="Father's Name" matInput formControlName="fathersName"
+                                    pattern="^[a-zA-Z ]*$">
                             </mat-form-field>
                         </div>
                         <div fxLayout>
@@ -95,13 +100,16 @@
                         </div>
                         <div fxLayout fxLayoutGap="20px">
                             <mat-form-field fxFlex=34>
-                                <input type="text" placeholder="Locality" matInput formControlName="locality" pattern="^[a-zA-Z ]*$">
+                                <input type="text" placeholder="Locality" matInput formControlName="locality"
+                                    pattern="^[a-zA-Z ]*$">
                             </mat-form-field>
                             <mat-form-field fxFlex=33>
-                                <input type="text" placeholder="PIN Code" matInput formControlName="pincode" pattern="^[0-9]{6}$">
+                                <input type="text" placeholder="PIN Code" matInput formControlName="pincode"
+                                    pattern="^[0-9]{6}$">
                             </mat-form-field>
                             <mat-form-field fxFlex=33>
-                                <input type="text" placeholder="Mobile Number" matInput formControlName="mobileNumber" pattern="^[0-9]{10}$">
+                                <input type="text" placeholder="Mobile Number" matInput formControlName="mobileNumber"
+                                    pattern="^[0-9]{10}$">
                             </mat-form-field>
                         </div>
                         <div fxLayout fxLayoutGap="20px">
@@ -129,17 +137,20 @@
                 </div>
                 <div *ngIf="!dataPassed.editMode" fxLayout="column">
                     <mat-form-field>
-                        <input type="text" matInput formControlName="imagePath" placeholder="Image path" [(ngModel)]="imgPreview">
+                        <input type="text" matInput formControlName="imagePath" placeholder="Image path"
+                            [(ngModel)]="imgPreview">
                     </mat-form-field>
                     <img [src]="imgPreview">
                 </div>
-                
+
                 <div style="margin-top: 10px;">
                     <button mat-raised-button color="accent" matStepperPrevious>Back</button>
                     <button mat-raised-button color="warn" mat-dialog-close style="margin-left: 10px;">cancel</button>
                     <button mat-raised-button color="primary" [mat-dialog-close]="studentForm"
                         style="margin-left: 10px;"
                         [disabled]="studentForm.invalid">{{ dataPassed.editMode? 'Save' : 'Add' }}</button>
+                    <!-- <button mat-raised-button color="primary" style="float: right;"
+                        (click)="downloadPDF()">Download</button> -->
                 </div>
             </mat-step>
         </form>

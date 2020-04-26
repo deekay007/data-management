@@ -18,16 +18,16 @@ export class VolunteersEditComponent implements OnInit {
     this.volunteerForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
-      bloodGroup: new FormControl('', [Validators.required]),
-      dob: new FormControl('', [Validators.required]),
+      bloodGroup: new FormControl(''),
+      dob: new FormControl(''),
       batch: new FormControl('', [Validators.required]),
       branch: new FormControl('', [Validators.required]),
-      companyName: new FormControl('', [Validators.required]),
-      jobLocation: new FormControl('', [Validators.required]),
+      companyName: new FormControl(''),
+      jobLocation: new FormControl(''),
       responsibility: new FormControl('', [Validators.required]),
-      aadharNumber: new FormControl('', [Validators.required]),
-      fathersName: new FormControl('', [Validators.required]),
-      mothersName: new FormControl('', [Validators.required]),
+      aadharNumber: new FormControl(''),
+      fathersName: new FormControl(''),
+      mothersName: new FormControl(''),
       address: new FormControl('', [Validators.required]),
       locality: new FormControl('', [Validators.required]),
       pincode: new FormControl('', [Validators.required]),
@@ -37,30 +37,11 @@ export class VolunteersEditComponent implements OnInit {
 
     if (this.dataPassed.editMode) {
       this.setValue(this.dataPassed.volunteer);
-      // console.log(this.dataPassed.volunteer);
     }
   }
 
   setValue(volunteer) {
-    this.volunteerForm.setValue({
-      name: volunteer.name,
-      gender: volunteer.gender,
-      bloodGroup: volunteer.bloodGroup,
-      dob: volunteer.dob,
-      batch: volunteer.batch,
-      branch: volunteer.branch,
-      companyName: volunteer.companyName,
-      jobLocation: volunteer.jobLocation,
-      responsibility: volunteer.responsibility,
-      aadharNumber: volunteer.aadharNumber,
-      fathersName: volunteer.fathersName,
-      mothersName: volunteer.mothersName,
-      address: volunteer.address,
-      locality: volunteer.locality,
-      pincode: volunteer.pincode,
-      mobileNumber: volunteer.mobileNumber,
-      imagePath: volunteer.imagePath
-    })
+    this.volunteerForm.setValue(volunteer)
   }
 
 }

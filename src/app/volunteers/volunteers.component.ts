@@ -50,7 +50,7 @@ export class VolunteersComponent implements OnInit, AfterViewInit {
     });
     addDialog.afterClosed().subscribe(volunteer => {
       if (volunteer) {
-        const index = this.volunteersService.searchVolunteer(volunteer.value.aadharNumber);
+        const index = this.volunteersService.searchVolunteer(volunteer.value.mobileNumber);
         console.log(index);
         if (index !== -1){
           this.alertMessage = 'duplicate';
@@ -62,8 +62,8 @@ export class VolunteersComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onShowDetails(aadharNumber: string) {
-    const index = this.volunteersService.searchVolunteer(aadharNumber);
+  onShowDetails(mobileNumber: string) {
+    const index = this.volunteersService.searchVolunteer(mobileNumber);
     const editDialog = this.matDialog.open(VolunteersEditComponent, {
       data: {
         editMode: true,

@@ -62,13 +62,13 @@
         <ng-container matColumnDef="showDetails">
             <th mat-header-cell *matHeaderCellDef> Show Details </th>
             <td mat-cell *matCellDef="let element; let i = index"> <button mat-raised-button color="primary"
-                    (click)="onShowDetails(element.aadharNumber)">Click Here</button> </td>
+                    (click)="onShowDetails(element.mobileNumber)">Click Here</button> </td>
         </ng-container>
 
         <ng-container matColumnDef="deleteDetails">
             <th mat-header-cell *matHeaderCellDef> Delete Details </th>
             <td mat-cell *matCellDef="let element; let i = index"> <button mat-raised-button color="warn"
-                    (click)="onDeleteButtonClicked(element.aadharNumber)">Delete</button> </td>
+                    (click)="onDeleteButtonClicked(element.mobileNumber)">Delete</button> </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentsEditComponent } from './students-edit/students-edit.component';
 import { StudentsService } from '../shared/students.service';
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.css']
 })
-export class StudentsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class StudentsComponent implements OnInit, AfterViewInit {
 
   alertMessage: string;
   showAlert: boolean = false;
@@ -38,10 +38,6 @@ export class StudentsComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-  }
-
-  ngOnDestroy() {
-    this.studentSubs.unsubscribe();
   }
 
   doFilter(filterValue) {
